@@ -14,7 +14,7 @@ const getPokemonById = async (id: number) => {
 };
 
 export const exampleRouter = createRouter()
-  .query("pokemon", {
+  .query("getPokemonById", {
     async resolve({ input }) {
       const [first, second] = getOptionsForVote();
       const pokemon1 = await getPokemonById(first);

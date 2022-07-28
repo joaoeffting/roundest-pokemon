@@ -9,7 +9,7 @@ type TechnologyCardProps = {
 };
 
 const Home: NextPage = () => {
-  const { data, isLoading } = trpc.useQuery(["api.pokemon"]);
+  const { data, isLoading } = trpc.useQuery(["api.getPokemonById"]);
 
   if (isLoading) return <div>Loading</div>;
 
@@ -29,12 +29,31 @@ const Home: NextPage = () => {
         <div className="text-2xl text-center">Which Pokémon is rouded?</div>
         <div className="p-2"></div>
         <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
-          <div className="w-16 h-16 bg-red-800">
-            <Image src={image1} alt="Pokemon 1" width={500} height={500} />
+          <div className="w-64 h-64 flex flex-col">
+            <Image
+              src={image1}
+              alt="Pokemon 1"
+              layout="responsive"
+              width={96}
+              height={96}
+              className="w-full"
+            />
+            <div className="text-xl text-center capitalize mt-[-2rem]">
+              {pokemon1?.name}
+            </div>
           </div>
           <div className="p-8">VS</div>
-          <div className="w-16 h-16 bg-red-800">
-            <Image src={image2} alt="Pokemon 2" width={500} height={500} />
+          <div className="w-64 h-64 flex flex-col">
+            <Image
+              src={image2}
+              alt="Pokemon 2"
+              width={96}
+              height={96}
+              layout="responsive"
+            />
+            <div className="text-xl text-center capitalize mt-[-2rem]">
+              {pokemon2?.name}
+            </div>
           </div>
         </div>
       </div>
