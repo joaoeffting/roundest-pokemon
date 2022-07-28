@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Head from "next/head";
+import Image from "next/image";
 import { trpc } from "../utils/trpc";
 
 type TechnologyCardProps = {
@@ -9,19 +9,38 @@ type TechnologyCardProps = {
 };
 
 const Home: NextPage = () => {
-  const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const { data, isLoading } = trpc.useQuery(["api.pokemon"]);
 
-  return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
-      <div className="text-2xl text-center">Which Pokémon is rouded?</div>
-      <div className="p-2"></div>
-      <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
-        <div className="w-16 h-16 bg-red-200"></div>
-        <div className="p-8">VS</div>
-        <div className="w-16 h-16 bg-red-200"></div>
+  if (isLoading) return <div>Loading</div>;
+
+  if (data) {
+    const { pokemon1, pokemon2 } = data;
+
+    const {
+      sprites: { front_default: image1 },
+    } = pokemon1;
+
+    const {
+      sprites: { front_default: image2 },
+    } = pokemon2;
+
+    return (
+      <div className="h-screen w-screen flex flex-col justify-center items-center">
+        <div className="text-2xl text-center">Which Pokémon is rouded?</div>
+        <div className="p-2"></div>
+        <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
+          <div className="w-16 h-16 bg-red-800">
+            <Image src={image1} alt="Pokemon 1" width={500} height={500} />
+          </div>
+          <div className="p-8">VS</div>
+          <div className="w-16 h-16 bg-red-800">
+            <Image src={image2} alt="Pokemon 2" width={500} height={500} />
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <div>Something went wrong</div>;
 };
 
 const TechnologyCard = ({
