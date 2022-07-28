@@ -11,7 +11,17 @@ type TechnologyCardProps = {
 const Home: NextPage = () => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
 
-  return <div className="text-2xl text-red-200">Hello World</div>;
+  return (
+    <div className="h-screen w-screen flex flex-col justify-center items-center">
+      <div className="text-2xl text-center">Which Pokémon is rouded?</div>
+      <div className="p-2"></div>
+      <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
+        <div className="w-16 h-16 bg-red-200"></div>
+        <div className="p-8">VS</div>
+        <div className="w-16 h-16 bg-red-200"></div>
+      </div>
+    </div>
+  );
 };
 
 const TechnologyCard = ({
