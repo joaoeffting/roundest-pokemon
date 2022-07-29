@@ -1,14 +1,17 @@
 import React from "react";
 import Image from "next/image";
+import Button from "./Button";
 
 const Pokemon = ({
   imageSrc,
   alt,
   name,
+  onPokemonVoteClick,
 }: {
   imageSrc: string;
   alt: string;
   name: string;
+  onPokemonVoteClick: () => void;
 }) => {
   return (
     <div className="w-64 h-64 flex flex-col">
@@ -21,6 +24,7 @@ const Pokemon = ({
         className="w-full"
       />
       <div className="text-xl text-center capitalize mt-[-2rem]">{name}</div>
+      <Button text="Vote" onClick={onPokemonVoteClick} />
     </div>
   );
 };
