@@ -2,6 +2,9 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import { trpc } from "../utils/trpc";
 
+// COMPONETS
+import { Pokemon, Header } from "../components";
+
 type TechnologyCardProps = {
   name: string;
   description: string;
@@ -26,35 +29,12 @@ const Home: NextPage = () => {
 
     return (
       <div className="h-screen w-screen flex flex-col justify-center items-center">
-        <div className="text-2xl text-center">Which Pokémon is rouded?</div>
+        <Header text="Which is the roundest?" />
         <div className="p-2"></div>
         <div className="border rounded p-8 flex justify-between max-w-2xl items-center">
-          <div className="w-64 h-64 flex flex-col">
-            <Image
-              src={image1}
-              alt="Pokemon 1"
-              layout="responsive"
-              width={96}
-              height={96}
-              className="w-full"
-            />
-            <div className="text-xl text-center capitalize mt-[-2rem]">
-              {pokemon1?.name}
-            </div>
-          </div>
+          <Pokemon imageSrc={image1} alt="Pokemon 1" name={pokemon1?.name} />
           <div className="p-8">VS</div>
-          <div className="w-64 h-64 flex flex-col">
-            <Image
-              src={image2}
-              alt="Pokemon 2"
-              width={96}
-              height={96}
-              layout="responsive"
-            />
-            <div className="text-xl text-center capitalize mt-[-2rem]">
-              {pokemon2?.name}
-            </div>
-          </div>
+          <Pokemon imageSrc={image2} alt="Pokemon 2" name={pokemon2?.name} />
         </div>
       </div>
     );
